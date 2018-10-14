@@ -1,12 +1,12 @@
-#Advanced algorithms and data structures
+# Advanced algorithms and data structures
 Subject realized as course during studies.
 
 The aim of those project classes is to present students theory of algorithms with 
 particular emphasis on problems that do not fit in the basic course in this subject.
 
-##Dijkstra's algorithm
+## Dijkstra's algorithm
 
-####Description
+#### Description
 Is an algorithm for finding the shortest paths between nodes in a graph, which may represent, for example, road networks
  
 Algorithm via [Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Algorithm) in seps : 
