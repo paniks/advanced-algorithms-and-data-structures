@@ -78,3 +78,26 @@ o.add_weighted_edges(structure_scheme)
 ```python 
 o.shortest_path(start_point, end_point)
 ```
+## 2. Ford-Fulkurson Algorithm
+#### Task Description
+
+1. Implement Ford-Fulkerson Algorithm. 
+2. Calculate maximum flow between vertices 10 and 60. 
+3. Find a target vertex for which the maximum flow from the source s=10 is reached. 
+
+#### Algorithm description 
+It is used to model a network flow (e.g., traffic flow, liquid flow, electric current flow etc.).
+
+Pseudocode via [Wikipedia](https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm):
+
+    Inputs Given a Network G = ( V , E ) {\displaystyle G=(V,E)} G=(V,E) with flow capacity c, a source node s, and a sink node t
+    Output Compute a flow f from s to t of maximum value
+
+        f ( u , v ) ← 0 {\displaystyle f(u,v)\leftarrow 0} f(u,v)\leftarrow 0 for all edges ( u , v ) {\displaystyle (u,v)} (u,v)
+        While there is a path p from s to t in G f {\displaystyle G_{f}} G_{f}, such that c f ( u , v ) > 0 {\displaystyle c_{f}(u,v)>0} c_{f}(u,v)>0 for all edges ( u , v ) ∈ p {\displaystyle (u,v)\in p} (u,v)\in p:
+            Find c f ( p ) = min { c f ( u , v ) : ( u , v ) ∈ p } {\displaystyle c_{f}(p)=\min\{c_{f}(u,v):(u,v)\in p\}} c_{f}(p)=\min\{c_{f}(u,v):(u,v)\in p\}
+            For each edge ( u , v ) ∈ p {\displaystyle (u,v)\in p} (u,v)\in p
+                f ( u , v ) ← f ( u , v ) + c f ( p ) {\displaystyle f(u,v)\leftarrow f(u,v)+c_{f}(p)} f(u,v)\leftarrow f(u,v)+c_{f}(p) (Send flow along the path)
+                f ( v , u ) ← f ( v , u ) − c f ( p ) {\displaystyle f(v,u)\leftarrow f(v,u)-c_{f}(p)} f(v,u)\leftarrow f(v,u)-c_{f}(p) (The flow might be "returned" later)
+
+#### Usage

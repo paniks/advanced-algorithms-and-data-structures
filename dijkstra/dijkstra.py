@@ -16,14 +16,19 @@ def read_graph_structure_scheme(graph_structure_scheme_file):
 
 def dijkstra(graph, start):
     S = set()
+    #set infinity
     delta = dict.fromkeys(list(graph.adj), np.inf)
+    #set zero
     previous = dict.fromkeys(list(graph.adj), None)
 
     delta[start] = 0
 
+    #create set of neighbours
     neighbors = {key: list(graph.neighbors(key)) for key in list(graph.node)}
 
+
     while S != set(graph.node):
+        #choose smallest from neighbours
         v = min((set(delta.keys())-S), key=delta.get)
         for neighbor in set(neighbors[v]) - S:
             new_path =delta[v] + graph[v][neighbor]['weight']
@@ -46,12 +51,19 @@ def shortest_path(graph, start, end):
         path.append(vertex)
         vertex = previous[vertex]
 
+
     path.reverse()
+
+
+    for key in path:
+        print("node: " + str(key), "  cost after step: " + str(delta[key]))
+
 
     return path
 
 
-graph_structure_file = './dijkstra/graf.txt'
+
+graph_structure_file = './graf.txt'
 structure_scheme = read_graph_structure_scheme(graph_structure_file)
 structure_scheme = np.asarray(structure_scheme, dtype=int)
 
@@ -60,5 +72,4 @@ graph.add_weighted_edges_from(structure_scheme)
 
 print(shortest_path(graph, 1, 20))
 
-#   SHORT TEST
-assert nx.dijkstra_path(graph, 1, 20) == shortest_path(graph, 1, 20)
+
