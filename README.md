@@ -42,9 +42,13 @@ pip install -r requiments.txt
 ```
 
 
-## Dijkstra's algorithm
+## 1. Dijkstra's algorithm
+#### Task Description
+1. Implement Disjkstra algorithm (being used in the Open Shortest Path First routing protocol) using any graph library, e.g., JUNG for JAVA or NetworkX for Python.
 
-#### Description
+2. Test it using this input file containg the weighted graph (see the example below) data given as a sequence of records of the form (source vertex index;destination vertex index;edge weight). Find  distance between vertices 1 and 20 and all vertices on the path (incl. endpoints, i.e., nodes 1 and 20)
+
+#### Algorithm description
 Is an algorithm for finding the shortest paths between nodes in a graph, which may represent, for example, road networks
  
 Algorithm via [Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Algorithm) in steps : 
