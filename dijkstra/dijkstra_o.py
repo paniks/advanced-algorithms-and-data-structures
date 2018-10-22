@@ -1,17 +1,6 @@
 import networkx as nx
 import numpy as np
-
-
-def read_graph_structure_scheme(graph_structure_scheme_file):
-    with open(graph_structure_scheme_file, 'r') as f:
-        tmp_structure = f.read().splitlines()
-    f.close()
-
-    structure = []
-    for line in tmp_structure:
-        structure.append(line.split(';'))
-
-    return structure
+from tools import read_graph_structure_scheme
 
 
 class Dijkstra(object):
@@ -87,7 +76,7 @@ class Dijkstra(object):
 
 
 graph_structure_file = './dijkstra/graf.txt'
-structure_scheme = read_graph_structure_scheme(graph_structure_file)
+structure_scheme = read_graph_structure_scheme(graph_structure_file, ';')
 structure_scheme = np.asarray(structure_scheme, dtype=int)
 
 f = Dijkstra()
