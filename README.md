@@ -101,3 +101,23 @@ Pseudocode via [Wikipedia](https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_
                 f ( v , u ) ← f ( v , u ) − c f ( p ) {\displaystyle f(v,u)\leftarrow f(v,u)-c_{f}(p)} f(v,u)\leftarrow f(v,u)-c_{f}(p) (The flow might be "returned" later)
 
 #### Usage
+1. Prepare file with graph structure like file graf.txt and use function read_graph_structure_scheme(file.txt)
+2. Import Ford-Fulkerson module and read_graph_structure_scheme from tools.
+```python 
+from ford_fulkerson import FordFulkerson
+from tools import read_graph_structure_scheme
+```
+3. Read file and prepare scheme.
+```python
+structure_scheme = read_graph_structure_scheme('graf.txt', '\t')
+structure_scheme = np.asarray(structure_scheme)
+```
+4. Call objects and 'initialization' methods.
+```python
+o = FordFulkerson()
+o.create_graph(structure_scheme)
+```
+5. Call max_flow method.
+```python 
+o.max_flow(source, target)
+```
