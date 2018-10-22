@@ -75,7 +75,7 @@ class FordFulkerson(object):
             u = v
         return flow
 
-    def ford_fulkerson(self, source, target, cutoff=float('inf')):
+    def max_flow(self, source, target, cutoff=float('inf')):
         flow_value = 0
         while flow_value < cutoff:
             v, pred, succ = self.breadth_first_search(source, target)
@@ -106,4 +106,4 @@ structure_scheme = np.asarray(structure_scheme)
 
 a = FordFulkerson()
 a.create_graph(structure_scheme)
-print(a.ford_fulkerson('10', '60'))
+print(a.max_flow('10', '60'))
