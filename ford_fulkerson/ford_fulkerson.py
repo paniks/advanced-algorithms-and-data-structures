@@ -1,3 +1,4 @@
+import operator
 import networkx as nx
 import numpy as np
 
@@ -8,8 +9,10 @@ class FordFulkerson(object):
     def __init__(self):
         self.graph = None
         self.residual = None
+        self.graph_scheme = None
 
     def create_graph(self, graph_scheme):
+        self.graph_scheme = graph_scheme
         self.graph = nx.DiGraph()
         for i in graph_scheme:
             self.graph.add_edge(str(i[0]), str(i[1]), capacity=float(i[2]), flow=0)
@@ -25,6 +28,9 @@ class FordFulkerson(object):
         self.residual_successors = self.residual.succ
         self.residual_predecessors = self.residual.pred
         self.residual_nodes = self.residual.nodes
+
+    def reset(self):
+        self.create_graph(self.graph_scheme)
 
     def breadth_first_search(self, src, target):
 
@@ -76,6 +82,7 @@ class FordFulkerson(object):
         return flow
 
     def max_flow(self, source, target, cutoff=float('inf')):
+        self.reset()
         flow_value = 0
         while flow_value < cutoff:
             v, pred, succ = self.breadth_first_search(source, target)
@@ -107,3 +114,8 @@ structure_scheme = np.asarray(structure_scheme)
 a = FordFulkerson()
 a.create_graph(structure_scheme)
 print(a.max_flow('10', '60'))
+
+nodes = a.graph.nodes
+
+max_flows = {value: a.max_flow('10', value) for value in nodes if value != '10'}
+print(max(max_flows.items(), key=operator.itemgetter(1))[0])
