@@ -15,7 +15,7 @@ class FordFulkerson(object):
         self.graph_scheme = graph_scheme
         self.graph = nx.DiGraph()
         for i in graph_scheme:
-            self.graph.add_edge(str(i[0]), str(i[1]), capacity=float(i[2]), flow=0)
+            self.graph.add_edge(str(i[0]), str(i[1]), capacity=float(i[2]))
 
         self.__create_residual()
 
@@ -113,7 +113,7 @@ structure_scheme = np.asarray(structure_scheme)
 
 a = FordFulkerson()
 a.create_graph(structure_scheme)
-print(a.max_flow('10', '60'))
+print(a.max_flow('10', '62'))
 
 nodes = a.graph.nodes
 
