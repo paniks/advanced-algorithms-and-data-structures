@@ -123,4 +123,7 @@ o.max_flow(source, target)
 ```
 
 ## Lab 4. 
-[Concurrent matrix multiplication](computer_graphics_algorithm/README.md)
+[Computer Graphics Algorithm](computer_graphics_algorithm/README.md)
+
+## Lab 5. 
+[Parallel matrices multiplication](parallel_matrices/README.md)
