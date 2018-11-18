@@ -42,7 +42,7 @@ pip install -r requiments.txt
 ```
 
 
-## 1. Dijkstra's algorithm
+## Lab 1. Dijkstra's algorithm
 #### Task Description
 1. Implement Disjkstra algorithm (being used in the Open Shortest Path First routing protocol) using any graph library, e.g., JUNG for JAVA or NetworkX for Python.
 
@@ -78,7 +78,7 @@ o.add_weighted_edges(structure_scheme)
 ```python 
 o.shortest_path(start_point, end_point)
 ```
-## 2. Ford-Fulkurson Algorithm
+## Lab 2/3. Ford-Fulkurson Algorithm
 #### Task Description
 
 1. Implement Ford-Fulkerson Algorithm. 
@@ -121,3 +121,6 @@ o.create_graph(structure_scheme)
 ```python 
 o.max_flow(source, target)
 ```
+
+## Lab 4. 
+[Concurrent matrix multiplication](computer_graphics_algorithm/README.md)
