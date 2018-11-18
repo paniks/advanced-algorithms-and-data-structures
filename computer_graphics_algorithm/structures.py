@@ -1,6 +1,3 @@
-from typing import List
-
-
 class Point:
     def __init__(self, x, y, z):
         self.x = x
@@ -42,5 +39,5 @@ class Face:
 
 
 class Solid:
-    def __init__(self, faces):
-        self.faces = list(faces)
+    def __init__(self, faces: list):
+        self.faces = faces

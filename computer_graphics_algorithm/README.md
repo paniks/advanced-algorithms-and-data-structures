@@ -1,3 +1,7 @@
+#####Code credicts: 
+#####@evemorgen
+
+
 In this exercise you will implement functions being frequently used in computer graphics, CAD systems, design software etc.
 We deal with a 3D solid which is assumed to be given as an array, say F, of triangles (faces) forming its surface:
 

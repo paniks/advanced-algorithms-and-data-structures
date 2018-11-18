@@ -1,4 +1,5 @@
 import re
+import itertools
 
 from multimethod import multimethod
 from math import sqrt
@@ -99,39 +100,6 @@ def distance(e1: Edge, e2: Edge) -> float:
     return dP.norm() if dP.norm() > SMALL_NUM else 0
 
 
-# def normal_vector(f: Face) -> Vector:
-#     #   compute a unit normal vector of a face
-#
-#     v1 = Vector(f.p0, f.p1)
-#     v2 = Vector(f.p0, f.p2)
-#
-#     normal = cross(v1, v2)
-#
-#     return normal
-#
-#
-# @multimethod  # noqa: F811
-# def distance(f: Face, p: Point) -> float:
-#     n = normal_vector(f)
-#
-#     # create unit vector
-#     unit_v = n / n.length()
-#
-#     # make a vector from one of the triangle points to the point of interest
-#     v = Vector(f.p0, p)
-#
-#     dotp = dot(v, unit_v)
-#
-#     # making the intersection point
-#     intersection = Point(
-#         v.x - n.x * dotp,
-#         v.y - n.y * dotp,
-#         v.z - n.z * dotp
-#     )
-#
-#     return sqrt(intersection.x**2 + intersection.y**2 + intersection.z**2)
-
-
 @multimethod
 def distance(f: Face, p: Point) -> float:
     # http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.104.4264&rep=rep1&type=pdf
@@ -143,7 +111,7 @@ def distance(f: Face, p: Point) -> float:
     cosa = dot(Vector(f.p0, p), Np) / (Np.length() * Vector(f.p0, p).length())
 
     # the length of P0P0'
-    p0p0l = Vector(f.p0, p).length() * cosa
+    p0p0l = Vector(p, f.p0).length() * cosa
 
     # the vector P0P0'
     p0p0p = (Np / Np.length()) * (-1 * p0p0l)
@@ -159,20 +127,20 @@ def distance(f: Face, p: Point) -> float:
     # print("area, a, b, c: ", area, a, b, c)
 
     if 0 <= a <= 1 and 0 <= b <= 1 and 0 <= c <= 1:
-        return p0p0l
+        return sqrt(dot(p0p0p, p0p0p))
     else:
         e1 = Edge(f.p0, f.p1)
         e2 = Edge(f.p1, f.p2)
         e3 = Edge(f.p0, f.p2)
 
-        return min(distance(e1, p0p), distance(e2, p0p), distance(e3, p0p))
+        return min(distance(e1, p), distance(e2, p), distance(e3, p), distance(f.p0, p), distance(f.p1, p), distance(f.p2, p))
 
 
 @multimethod
 def distance(a: Face, b: Face) -> float:
     # http://www.ikonstantinos.com/Konstantinos_Krestenitis_ACME2015.pdf
     ae1, ae2, ae3 = a.edges
-    be1, be2, be3 = a.edges
+    be1, be2, be3 = b.edges
     distances = [
         distance(a, b.p0),
         distance(a, b.p1),
@@ -190,11 +158,10 @@ def distance(a: Face, b: Face) -> float:
         distance(ae3, be2),
         distance(ae3, be3)
     ]
-    # distances = [distance for distance in distances if distance != 0]
     return min(distances)
 
 
-@multimethod  # noqa: F811
+@multimethod
 def distance(a: Edge, b: Face) -> float:
     eb1, eb2, eb3 = b.edges
     return min(
@@ -207,9 +174,9 @@ def distance(a: Edge, b: Face) -> float:
 )
 
 
-@multimethod  # noqa: F811
+@multimethod
 def distance(a: Solid, b: Solid) -> float:
-    distances = [distance(f1, f2) for f1, f2 in zip(a.faces, b.faces)]
+    distances = [distance(f1, f2) for f1, f2 in itertools.product(a.faces, b.faces)]
     return min(distances)
 
 
